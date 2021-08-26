@@ -1,10 +1,28 @@
 version: "3"
 
 services: 
-  app:
+  rentx_db:
+    image: postgres
+    container_name: rentx_db
+    restart: always
+    ports: 
+      - 5432:5432 
+    environment: 
+      - POSTGRES_USER=cmVudHhpc3RoZWJlc3Q=
+      - POSTGRES_PASSWORD=cmVudHhpc2Fsd2F5c3RoZWJlc3Q=
+      - POSTGRES_DB=rentx
+    volumes: 
+      - pgdata:/data/postgres
+    network_mode: host
+  api:
     build: .
     container_name: rentxapi
     ports:
       - 3333:3333
     volumes:
       - .:/usr/app
+    network_mode: host
+
+volumes: 
+  pgdata: 
+    driver: local

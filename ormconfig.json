@@ -1,0 +1,8 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "cmVudHhpc3RoZWJlc3Q=",
+  "password": "cmVudHhpc2Fsd2F5c3RoZWJlc3Q=",
+  "database": "rentx"
+}
