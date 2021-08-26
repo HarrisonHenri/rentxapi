@@ -1,8 +1,8 @@
 {
-  "name": "finapi",
+  "name": "rentxapi",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/HarrisonHenri/finapi.git",
+  "repository": "https://github.com/HarrisonHenri/rentxapi.git",
   "author": "HarrisonHenri <harrisonhenrisn@gmail.com>",
   "license": "MIT",
   "scripts": {
