@@ -3,15 +3,16 @@ import { container } from "tsyringe";
 
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
-class CreateCategoryController {
+class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, username, email, driver_license } = request.body;
+    const { name, username, password, email, driver_license } = request.body;
 
-    const createCategoryUseCase = container.resolve(CreateUserUseCase);
+    const createUserUseCase = container.resolve(CreateUserUseCase);
 
-    await createCategoryUseCase.execute({
+    await createUserUseCase.execute({
       name,
       username,
+      password,
       email,
       driver_license,
     });
@@ -20,4 +21,4 @@ class CreateCategoryController {
   }
 }
 
-export { CreateCategoryController };
+export { CreateUserController };
