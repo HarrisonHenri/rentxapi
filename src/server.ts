@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(router);
 
-app.use((err: Error, _: Request, response: Response) => {
+app.use((err: Error, _: Request, response: Response, next: NextFunction) => {
   if (err instanceof AppError) {
     response.status(err.statusCode).json({ message: err.message });
   }
