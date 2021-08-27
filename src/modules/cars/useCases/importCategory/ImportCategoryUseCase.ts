@@ -58,7 +58,7 @@ class ImportCategoryUseCase {
       );
 
       if (!categoryAlreadyExists) {
-        this.categoriesRepository.create({
+        await this.categoriesRepository.create({
           name,
           description,
         });
