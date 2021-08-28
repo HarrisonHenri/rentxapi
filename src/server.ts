@@ -24,6 +24,8 @@ app.use((err: Error, _: Request, response: Response, next: NextFunction) => {
   response
     .status(500)
     .json({ message: `Internal server error - ${err.message}` });
+
+  next();
 });
 
 app.listen(3333);
