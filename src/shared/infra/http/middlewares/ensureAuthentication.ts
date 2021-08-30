@@ -4,7 +4,7 @@ import { verify } from "jsonwebtoken";
 import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsesRepository";
 import { AppError } from "@shared/errors/AppError";
 
-export async function ensureAuthenticated(
+export async function ensureAuthentication(
   request: Request,
   _: Response,
   next: NextFunction
