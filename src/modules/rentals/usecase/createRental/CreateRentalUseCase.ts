@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { common } from "@config/common";
+import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { ICreateRentalDTO } from "@modules/rentals/dtos/ICreateRentalDTO";
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
@@ -13,7 +14,9 @@ class CreateRentalUseCase {
     @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
     @inject("DateProvider")
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository
   ) {}
   async execute({
     car_id,
@@ -38,6 +41,8 @@ class CreateRentalUseCase {
 
     if (timeDifference < minimumRentalHours)
       throw new AppError("Invalid return time");
+
+    await this.carsRepository.updateAccessibility(car_id, false);
 
     return this.rentalsRepository.create({
       car_id,

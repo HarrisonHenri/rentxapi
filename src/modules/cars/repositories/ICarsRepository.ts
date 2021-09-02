@@ -15,6 +15,7 @@ interface ICarsRepository {
     fine_amount,
     license_plate,
   }: ICreateCarDTO): Promise<Car>;
+  updateAccessibility(id: string, available: boolean): Promise<void>;
 }
 
 export { ICarsRepository };

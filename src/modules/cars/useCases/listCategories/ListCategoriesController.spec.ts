@@ -19,7 +19,7 @@ describe("List Category Controller", () => {
     await connection.query(`
       INSERT INTO USERS(
         id, name, email, password, 
-        "isAdmin", driver_license, created_at
+        is_admin, driver_license, created_at
       ) values (
         '${id}', 'admin', 'admin@rentx.com.br', '${password}', 
         true, 'license-admin', 'now()'
