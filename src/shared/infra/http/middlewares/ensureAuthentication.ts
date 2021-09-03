@@ -1,7 +1,8 @@
 import { Response, Request, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 
-import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsesRepository";
+import { common } from "@config/common";
+import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { AppError } from "@shared/errors/AppError";
 
 export async function ensureAuthentication(
@@ -10,13 +11,14 @@ export async function ensureAuthentication(
   next: NextFunction
 ): Promise<void> {
   const authHeader = request.headers.authorization;
+  const { auth } = common;
 
   if (!authHeader) throw new AppError("Token missing", 401);
 
   const [, token] = authHeader.split(" ");
 
   try {
-    const { sub: user_id } = verify(token, "0af0b64569cde8182e0235cb7243e817");
+    const { sub: user_id } = verify(token, auth.secret);
 
     const usersRepository = new UsersRepository();
 

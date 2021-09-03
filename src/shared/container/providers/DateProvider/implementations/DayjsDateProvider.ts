@@ -18,6 +18,9 @@ class DayjsDateProvider implements IDateProvider {
 
     return dayjs(formattedEndDate).diff(formattedStartDate, "hours");
   }
+  addDays(days: number): Date {
+    return dayjs(new Date()).add(days, "days").toDate();
+  }
 
   private formatToUTC(date: Date): string {
     return dayjs(date).utc().local().format();
