@@ -28,24 +28,24 @@ describe("Create Car", () => {
     expect(carCreated.name).toBe(car.name);
     expect(carCreated.available).toBeTruthy();
   });
-  it("should not be able to create a Car with the same license_plate", () => {
-    expect(async () => {
-      const car1 = {
-        name: "Car 1 name",
-        description: "Car description",
-        brand: "Car brand",
-        category_id: "123123-asdasde21i-8548",
-        daily_rate: 100,
-        fine_amount: 10,
-        license_plate: "PQR-ZUM10",
-      };
-      const car2 = {
-        ...car1,
-        name: "Car 2 name",
-      };
+  it("should not be able to create a Car with the same license_plate", async () => {
+    const car1 = {
+      name: "Car 1 name",
+      description: "Car description",
+      brand: "Car brand",
+      category_id: "123123-asdasde21i-8548",
+      daily_rate: 100,
+      fine_amount: 10,
+      license_plate: "PQR-ZUM10",
+    };
+    const car2 = {
+      ...car1,
+      name: "Car 2 name",
+    };
+    await createCarUseCase.execute(car1);
 
-      await createCarUseCase.execute(car1);
-      await createCarUseCase.execute(car2);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCarUseCase.execute(car2)).rejects.toEqual(
+      new AppError("Car already exists")
+    );
   });
 });
