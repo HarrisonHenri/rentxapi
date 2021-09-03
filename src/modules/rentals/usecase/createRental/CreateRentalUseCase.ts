@@ -25,11 +25,13 @@ class CreateRentalUseCase {
   }: ICreateRentalDTO): Promise<Rental> {
     const { minimumRentalHours } = common;
 
-    const isCarRented = await this.rentalsRepository.findByCar(car_id);
+    const isCarRented = await this.rentalsRepository.findOpenRentalByCar(car_id);
 
     if (isCarRented) throw new AppError("Car unavailable");
 
-    const userHasARent = await this.rentalsRepository.findByUser(user_id);
+    const userHasARent = await this.rentalsRepository.findOpenRentalByUser(
+      user_id
+    );
 
     if (userHasARent)
       throw new AppError("There is a rental in progress fot that user");

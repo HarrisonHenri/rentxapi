@@ -34,12 +34,16 @@ class RentalsRepository implements IRentalsRepository {
     return rental;
   }
 
-  async findByCar(car_id: string): Promise<Rental> {
+  async findOpenRentalByCar(car_id: string): Promise<Rental> {
     return this.repository.findOne({ where: { car_id, end_date: null } });
   }
 
-  async findByUser(user_id: string): Promise<Rental> {
+  async findOpenRentalByUser(user_id: string): Promise<Rental> {
     return this.repository.findOne({ where: { user_id, end_date: null } });
+  }
+
+  async findByUser(user_id: string): Promise<Rental[]> {
+    return this.repository.find({ where: { user_id }, relations: ["car"] });
   }
 
   async findById(id: string): Promise<Rental> {

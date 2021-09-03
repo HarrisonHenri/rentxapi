@@ -12,8 +12,9 @@ interface IRentalsRepository {
     end_date,
     total,
   }: ICreateRentalDTO): Promise<Rental>;
-  findByCar(car_id: string): Promise<Rental>;
-  findByUser(user_id: string): Promise<Rental>;
+  findOpenRentalByCar(car_id: string): Promise<Rental>;
+  findOpenRentalByUser(user_id: string): Promise<Rental>;
+  findByUser(user_id: string): Promise<Rental[]>;
 }
 
 export { IRentalsRepository };
