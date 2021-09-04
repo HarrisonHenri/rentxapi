@@ -25,7 +25,9 @@ class CreateRentalUseCase {
   }: ICreateRentalDTO): Promise<Rental> {
     const { minimumRentalHours } = common;
 
-    const isCarRented = await this.rentalsRepository.findOpenRentalByCar(car_id);
+    const isCarRented = await this.rentalsRepository.findOpenRentalByCar(
+      car_id
+    );
 
     if (isCarRented) throw new AppError("Car unavailable");
 

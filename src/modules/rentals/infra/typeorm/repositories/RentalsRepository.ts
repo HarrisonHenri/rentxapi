@@ -29,7 +29,7 @@ class RentalsRepository implements IRentalsRepository {
       total,
     });
 
-    this.repository.save(rental);
+    await this.repository.save(rental);
 
     return rental;
   }
