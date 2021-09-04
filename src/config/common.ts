@@ -8,6 +8,7 @@ const common = {
     expires_in_refresh_token: "30d",
     expires_in_refresh_token_in_days: 30,
   },
+  expires_in_email_token_hours: 3,
 };
 
 export { common };
