@@ -45,9 +45,15 @@ class CarsRepository implements ICarsRepository {
     return this.repository.findOne({ license_plate });
   }
 
-  findAvailable({ brand, name, category_id }: IListCarDTO): Promise<Car[]> {
+  async findAvailable({
+    brand,
+    name,
+    category_id,
+  }: IListCarDTO): Promise<Car[]> {
     const carsQuery = this.repository
       .createQueryBuilder("cars")
+      .leftJoinAndSelect("cars.specifications", "specifications")
+      .leftJoinAndSelect("cars.images", "images")
       .where("available = :available", { available: true });
 
     if (brand) {

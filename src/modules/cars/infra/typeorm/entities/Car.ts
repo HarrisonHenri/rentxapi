@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
+import { CarImage } from "./CarImage";
 import { Category } from "./Category";
 import { Specification } from "./Specifications";
 
@@ -53,6 +54,14 @@ class Car {
     inverseJoinColumns: [{ name: "specification_id" }],
   })
   specifications: Specification[];
+
+  @ManyToMany(() => CarImage)
+  @JoinTable({
+    name: "cars_image",
+    joinColumns: [{ name: "car_id" }],
+    inverseJoinColumns: [{ name: "id" }],
+  })
+  images: CarImage[];
 
   @CreateDateColumn()
   created_at: Date;
