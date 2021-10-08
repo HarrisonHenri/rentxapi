@@ -7,18 +7,10 @@ module.exports = {
     ["module-resolver",
     {
       alias: {
-        "@modules": [
-          "./scr/modules"
-        ],
-        "@config": [
-          "./scr/config"
-        ],
-        "@shared": [
-          "./scr/shared"
-        ],
-        "@utils": [
-          "./scr/utils"
-        ]
+        "@modules": "./scr/modules",
+        "@config": "./scr/config",
+        "@shared": "./scr/shared",
+        "@utils": "./scr/utils"
       }
     }],
     "babel-plugin-transform-typescript-metadata",
