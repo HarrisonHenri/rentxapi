@@ -1,7 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 
-import { upload } from "@config/upload";
+import { uploadConfig } from "@config/upload";
 import { CreateCarController } from "@modules/cars/useCases/createCar/CreateCarController";
 import { CreateCarSpecificationController } from "@modules/cars/useCases/createCarSpecification/CreateCarSpecificationController";
 import { ListAvailableCarsController } from "@modules/cars/useCases/listAvailableCars/ListAvailableCarsController";
@@ -12,7 +12,7 @@ import { ensureUserIsAdmin } from "../middlewares/ensureUserIsAdmin";
 
 const carsRoutes = Router();
 
-const uploadImages = multer(upload("./tmp/cars"));
+const uploadImages = multer(uploadConfig);
 
 const createCarController = new CreateCarController();
 const createCarSpecificationController = new CreateCarSpecificationController();

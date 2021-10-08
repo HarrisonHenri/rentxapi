@@ -3,6 +3,8 @@ import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
 import { common } from "@config/common";
+import { IUserResponseDTO } from "@modules/accounts/dtos/IUserResponseDTO";
+import { UserMap } from "@modules/accounts/mapper/UserMap";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
@@ -14,13 +16,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    driver_license: string;
-    avatar: string;
-  };
+  user: IUserResponseDTO;
   token: string;
   refresh_token: string;
 }
@@ -68,13 +64,7 @@ class AuthenticateUserUseCase {
     });
 
     return {
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        driver_license: user.driver_license,
-        avatar: user.avatar,
-      },
+      user: UserMap.toDTO(user),
       token,
       refresh_token,
     };
