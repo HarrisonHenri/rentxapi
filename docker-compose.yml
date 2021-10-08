@@ -13,7 +13,7 @@ services:
       - POSTGRES_DB=rentx
     volumes: 
       - pgdata:/data/postgres
-    network_mode: host
+    
   api:
     build: .
     container_name: rentxapi
@@ -21,7 +21,7 @@ services:
       - 3333:3333
     volumes:
       - .:/usr/app
-    network_mode: host
+    
 
 volumes: 
   pgdata: 
