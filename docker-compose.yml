@@ -13,6 +13,11 @@ services:
       - POSTGRES_DB=rentx
     volumes: 
       - pgdata:/data/postgres
+      
+  rentx_redis:
+    image: redis:alpine
+    ports: 
+      - 6379:6379 
     
   api:
     build: .
